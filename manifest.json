@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+  "name": "BrowserNotes",
+  "version": "1.0",
+
+  "description": "Testing for displaying html in the extension popup window.",
+  
+  "icons": {
+    "32": "icons/bn_32.png"	  
+  },
+  
+  "browser_action": {
+    "default_icon": "icons/bn_32.png",
+    "default_title": "BrowserNotes",
+    "default_popup": "popup/popup.html"
+  },
+
+  "permissions": ["storage"],
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "browsernotes@hopefullyunique.org"
+    }
+  }
+
+}

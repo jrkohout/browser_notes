@@ -1,0 +1,52 @@
+window.onload = () => {
+    console.log("Popup loaded!");
+
+    let timer;
+
+    document.getElementById("flash").onclick = () => {
+        const heading = document.getElementsByTagName("h2")[0];
+
+        if (!timer) {
+            timer = setInterval(() => {
+                if (heading.style.color === "red") {
+                    heading.style.color = "blue";
+                } else {
+                    heading.style.color = "red";
+                }
+            }, 200);
+        }
+    }
+
+    document.getElementById("stop").onclick = () => {
+        if (timer) {
+            clearInterval(timer);
+            timer = null;
+        }
+    }
+
+    document.getElementById("save").onclick = () => {
+        console.log("Saving note sync");
+        noteText = document.getElementById("textbox").value
+
+        // save note to storage
+        browser.storage.sync.set({text: noteText}).then(() => {console.log("successfully set note")}, onError);
+
+        // show note
+        const note = document.createElement("p");
+        note.innerText = noteText;
+        document.getElementById("savednotes").append(note);
+
+    }
+
+    document.getElementById("retrieve").onclick = () => {
+        browser.storage.sync.get().then(onGet, onerror);
+    }
+
+    const onGet = (item) => {
+        console.log(item);
+    }
+
+    const onError = (message) => {
+        console.log("POPUPTESTINGERROR: " + message);
+    }
+}
